@@ -771,14 +771,33 @@ app.get(['/debug-info', '/tool/debug-info'], (req, res) => {
 });
 // --- DEBUG ROUTE (END) ---
 
-// Serve static files from the React app (dist folder in root)
-app.use(express.static(path.join(__dirname, '../dist')));
+// Serve video downloader tool
+app.use('/tool', express.static(path.join(__dirname, '../tool')));
+app.use('/tool', express.static(path.join(__dirname, '../public')));
 
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
-});
+// Serve static files from the React app (dist folder in root) if exists
+const distPath = path.join(__dirname, '../dist');
+if (fs.existsSync(distPath)) {
+    app.use(express.static(distPath));
+    
+    // Catchall for React routes - serve dist/index.html
+    app.get('*', (req, res) => {
+        const distIndex = path.join(__dirname, '../dist/index.html');
+        if (fs.existsSync(distIndex)) {
+            res.sendFile(distIndex);
+        } else {
+            res.status(404).json({ error: 'Application not found' });
+        }
+    });
+} else {
+    // No dist folder - just serve API endpoints
+    app.get('*', (req, res) => {
+        res.status(404).json({ 
+            error: 'UI not found', 
+            message: 'API endpoints are available. Access /tool for video downloader.' 
+        });
+    });
+}
 
 // Start server - Listen on all network interfaces for LAN access
 app.listen(PORT, '0.0.0.0', () => {
