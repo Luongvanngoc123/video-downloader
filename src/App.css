@@ -1,0 +1,334 @@
+/* Global Styles - Premium Genshin Profile Showcase v2.0 */
+
+:root {
+    /* Colors */
+    --bg-primary: #0a0e1a;
+    --bg-secondary: #141824;
+    --bg-card: #1a1f2e;
+
+    --primary-gold: #ffc857;
+    --secondary-gold: #f9a825;
+    --accent: #4fc3ff;
+
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-tertiary: rgba(255, 255, 255, 0.5);
+
+    /* Spacing */
+    --container-width: 1400px;
+    --spacing: 1rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.app {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Animated Background */
+.app-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bg-gradient {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle at 20% 50%, rgba(255, 200, 87, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 40%, rgba(79, 195, 247, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(183, 148, 255, 0.06) 0%, transparent 50%);
+    animation: gradientShift 20s ease infinite;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translate(-5%, -5%) rotate(180deg);
+    }
+}
+
+.bg-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.15), transparent),
+        radial-gradient(2px 2px at 60% 70%, rgba(255, 200, 87, 0.1), transparent),
+        radial-gradient(1px 1px at 50% 50%, rgba(79, 195, 247, 0.1), transparent),
+        radial-gradient(1px 1px at 80% 10%, rgba(255, 255, 255, 0.1), transparent),
+        radial-gradient(2px 2px at 90% 60%, rgba(183, 148, 255, 0.08), transparent);
+    background-size: 200% 200%;
+    animation: particlesFloat 15s linear infinite;
+}
+
+@keyframes particlesFloat {
+    from {
+        background-position: 0% 0%;
+    }
+
+    to {
+        background-position: 100% 100%;
+    }
+}
+
+/* Header */
+.app-header {
+    position: relative;
+    z-index: 10;
+    padding: 3rem 2rem 2rem;
+    background: linear-gradient(180deg, rgba(10, 14, 26, 0.95) 0%, transparent 100%);
+    backdrop-filter: blur(20px);
+}
+
+.header-content {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    text-align: center;
+}
+
+.app-title {
+    font-size: 4rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    letter-spacing: -2px;
+}
+
+.title-icon {
+    font-size: 3.5rem;
+    filter: drop-shadow(0 0 20px rgba(255, 200, 87, 0.6));
+    animation: iconPulse 3s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 20px rgba(255, 200, 87, 0.6));
+    }
+
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 30px rgba(255, 200, 87, 0.9));
+    }
+}
+
+.app-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Main Content */
+.app-main {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    padding: 2rem;
+}
+
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+/* Characters Section */
+.characters-section {
+    margin-top: 3rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    color: var(--text-primary);
+}
+
+.title-decoration {
+    color: var(--primary-gold);
+    font-size: 2rem;
+    filter: drop-shadow(0 0 10px var(--primary-gold));
+}
+
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.no-characters {
+    text-align: center;
+    padding: 5rem 2rem;
+    font-size: 1.3rem;
+    color: var(--text-tertiary);
+}
+
+/* Loading & Error */
+.loading-wrapper,
+.error-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+/* Footer */
+.app-footer {
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(0deg, rgba(10, 14, 26, 0.95) 0%, transparent 100%);
+    backdrop-filter: blur(20px);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    margin-top: 5rem;
+    border-top: 1px solid rgba(255, 200, 87, 0.1);
+}
+
+.app-footer p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.app-footer a {
+    color: var(--primary-gold);
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.app-footer a:hover {
+    color: var(--secondary-gold);
+    text-shadow: 0 0 10px var(--primary-gold);
+}
+
+.footer-note {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    font-weight: 500;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary-gold), var(--secondary-gold));
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-gold);
+}
+
+/* Selection */
+::selection {
+    background: var(--primary-gold);
+    color: var(--bg-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .characters-grid {
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .app-title {
+        font-size: 2.5rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .title-icon {
+        font-size: 2.5rem;
+    }
+
+    .app-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .characters-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .app-header {
+        padding: 2rem 1.5rem 1.5rem;
+    }
+
+    .app-main {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-title {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+        gap: 1rem;
+    }
+
+    .title-decoration {
+        font-size: 1.4rem;
+    }
+}

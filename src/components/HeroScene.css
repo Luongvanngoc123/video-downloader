@@ -1,0 +1,23 @@
+.hero-scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    cursor: grab;
+}
+
+.hero-scene:active {
+    cursor: grabbing;
+}
+
+/* Performance optimizations */
+.hero-scene canvas {
+    outline: none;
+    touch-action: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-scene {
+        height: 300px;
+    }
+}

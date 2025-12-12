@@ -1,0 +1,118 @@
+.player-header {
+    margin-bottom: 2rem;
+}
+
+.player-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(41, 98, 155, 0.2), rgba(81, 45, 109, 0.2));
+    border: 2px solid rgba(255, 200, 87, 0.3);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.player-card:hover {
+    border-color: rgba(255, 200, 87, 0.6);
+    box-shadow: 0 8px 32px rgba(255, 200, 87, 0.2);
+}
+
+.player-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(255, 200, 87, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(79, 195, 247, 0.1) 0%, transparent 50%);
+    z-index: 0;
+}
+
+.player-info {
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+}
+
+.player-main {
+    margin-bottom: 1.5rem;
+}
+
+.player-nickname {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.player-uid {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.player-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 200, 87, 0.3);
+    transform: translateY(-2px);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-gold);
+}
+
+.player-signature {
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid var(--primary-gold);
+    border-radius: 4px;
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .player-nickname {
+        font-size: 2rem;
+    }
+
+    .player-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .player-info {
+        padding: 1.5rem;
+    }
+}
