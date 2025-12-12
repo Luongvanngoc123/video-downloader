@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Genshin Impact Profile Showcase for UID 827081602" />
+    <title>Genshin Profile Showcase - UID 827081602</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-BVji4a3u.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BH4CyERn.css">
+  
+  <style>
+    /* Hamburger Menu Styles */
+    .hamburger-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      z-index: 10000;
+      box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+      transition: all 0.3s;
+    }
+    .hamburger-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    }
+    .hamburger-btn span {
+      width: 24px;
+      height: 3px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger-btn.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+    .hamburger-btn.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger-btn.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+    
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+      transition: right 0.3s ease;
+      z-index: 9999;
+      padding: 80px 30px 30px;
+    }
+    .nav-menu.active {
+      right: 0;
+    }
+    .nav-menu a {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px 20px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .nav-menu a:hover {
+      transform: translateX(-5px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+    .nav-menu a svg {
+      width: 24px;
+      height: 24px;
+    }
+    
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 9998;
+    }
+    .nav-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+  </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    
+    <!-- Hamburger Menu Button -->
+    <button class="hamburger-btn" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    
+    <!-- Navigation Menu -->
+    <div class="nav-menu" id="navMenu">
+      <a href="/">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        Trang Chủ
+      </a>
+      <a href="/tool">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        Video Downloader
+      </a>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="nav-overlay" id="navOverlay" onclick="toggleMenu()"></div>
+    
+    <script>
+      function toggleMenu() {
+        const btn = document.querySelector('.hamburger-btn');
+        const menu = document.getElementById('navMenu');
+        const overlay = document.getElementById('navOverlay');
+        
+        btn.classList.toggle('active');
+        menu.classList.toggle('active');
+        overlay.classList.toggle('active');
+      }
+    </script>
+</body>
+
+</html>
