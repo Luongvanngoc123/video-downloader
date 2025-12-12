@@ -1,0 +1,81 @@
+// =========================================
+// FIX CHO LỖI: ENOENT /root/tool/index.html
+// =========================================
+
+// Tìm phần này trong server.js (gần cuối file, trước app.listen):
+
+// OLD CODE (XÓA HOẶC COMMENT):
+// app.use(express.static(path.join(__dirname, '../dist')));
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../dist/index.html'));
+// });
+
+// NEW CODE (THAY BẰNG):
+
+// Serve video downloader tool from public folder
+app.use('/tool', express.static(path.join(__dirname, '../public')));
+
+// Serve main app dist folder if exists
+if (fs.existsSync(path.join(__dirname, '../dist'))) {
+    app.use(express.static(path.join(__dirname, '../dist')));
+}
+
+// Catchall route
+app.get('*', (req, res) => {
+    const distIndex = path.join(__dirname, '../dist/index.html');
+    const publicIndex = path.join(__dirname, '../public/index.html');
+    
+    // Try dist first, fallback to public
+    if (fs.existsSync(distIndex)) {
+        res.sendFile(distIndex);
+    } else if (fs.existsSync(publicIndex)) {
+        res.sendFile(publicIndex);
+    } else {
+        res.status(404).send('Application not found. Please build frontend or check public folder.');
+    }
+});
+
+// =========================================
+// HƯỚNG DẪN ÁP DỤNG:
+// =========================================
+
+1. SSH vào Ubuntu server:
+   ssh root@27.71.29.233
+
+2. Stop app hiện tại:
+   pm2 stop video-downloader
+
+3. Edit server.js:
+   nano /root/video-downloader/server/server.js
+
+4. Scroll xuống cuối file (trước app.listen)
+
+5. Tìm và COMMENT OUT hoặc XÓA phần serve static files cũ:
+   // app.use(express.static(path.join(__dirname, '../dist')));
+   // app.get('*', (req, res) => {
+   //     res.sendFile(path.join(__dirname, '../dist/index.html'));
+   // });
+
+6. PASTE đoạn code NEW CODE ở trên vào
+
+7. Save file:
+   Ctrl + X, Y, Enter
+
+8. Restart app:
+   pm2 restart video-downloader
+
+9. Test:
+   http://27.71.29.233/tool
+
+// =========================================
+// HOẶC QUICK FIX (KHÔNG CẦN SỬA CODE):
+// =========================================
+
+Chạy lệnh này trên Ubuntu:
+
+cd /root/video-downloader
+mkdir -p tool
+cp -r public/* tool/
+pm2 restart video-downloader
+
+Xong! Test: http://27.71.29.233/tool

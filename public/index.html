@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Download videos from YouTube, Facebook, Instagram, TikTok, and 1000+ other platforms in high quality without watermarks"
+    />
+    <meta
+      name="keywords"
+      content="video downloader, youtube downloader, facebook downloader, instagram downloader, tiktok downloader"
+    />
+    <title>Video Downloader - Download Videos From Any Platform</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Background Elements -->
+    <div class="bg-gradient"></div>
+    <div class="bg-blur bg-blur-1"></div>
+    <div class="bg-blur bg-blur-2"></div>
+    <div class="bg-blur bg-blur-3"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="logo">
+          <svg
+            width="40"
+            height="40"
+            viewBox="0 0 40 40"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect width="40" height="40" rx="12" fill="url(#gradient)" />
+            <path d="M15 12L28 20L15 28V12Z" fill="white" />
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
+                <stop offset="0%" stop-color="#667eea" />
+                <stop offset="100%" stop-color="#764ba2" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <h1>Video Downloader</h1>
+        </div>
+        <p class="subtitle">
+          Download videos from YouTube, Facebook, Instagram, TikTok, and 1000+
+          platforms in original quality
+        </p>
+      </header>
+
+      <!-- Main Card -->
+      <main class="main-card">
+        <!-- URL Input Section -->
+        <section class="input-section">
+          <label for="videoUrl" class="input-label">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+              />
+              <path
+                d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+              />
+            </svg>
+            Video URL
+          </label>
+          <input
+            type="text"
+            id="videoUrl"
+            class="url-input"
+            placeholder="Paste video URL here (YouTube, Facebook, Instagram, TikTok, etc.)"
+            autocomplete="off"
+          />
+          <button id="fetchBtn" class="btn btn-primary">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+            Get Video Info
+          </button>
+        </section>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="loading hidden">
+          <div class="spinner"></div>
+          <p>Fetching video information...</p>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error" class="error hidden">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <p id="errorMessage"></p>
+        </div>
+
+        <!-- Video Info Section -->
+        <section id="videoInfo" class="video-info hidden">
+          <div class="video-preview">
+            <img
+              id="thumbnail"
+              src=""
+              alt="Video thumbnail"
+              class="thumbnail"
+            />
+            <div class="video-details">
+              <h2 id="videoTitle" class="video-title"></h2>
+              <div class="video-meta">
+                <span id="uploader" class="meta-item">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  <span></span>
+                </span>
+                <span id="duration" class="meta-item">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  <span></span>
+                </span>
+                <span id="platform" class="meta-item platform-badge"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quality Selection -->
+          <div class="quality-section">
+            <h3 class="section-title">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polygon points="23 7 16 12 23 17 23 7" />
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+              </svg>
+              Select Quality
+            </h3>
+            <div id="qualityOptions" class="quality-options"></div>
+          </div>
+
+          <button id="downloadBtn" class="btn btn-download" disabled>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download Video
+          </button>
+        </section>
+
+        <!-- Download Progress -->
+        <div id="downloadProgress" class="download-progress hidden">
+          <div class="progress-spinner"></div>
+          <p>Downloading video... Please wait</p>
+          <small>This may take a few moments depending on video size</small>
+        </div>
+      </main>
+
+      <!-- Supported Platforms -->
+      <section class="platforms-section">
+        <h3 class="platforms-title">Supported Platforms</h3>
+        <div class="platforms-grid">
+          <div class="platform-item">YouTube</div>
+          <div class="platform-item">Facebook</div>
+          <div class="platform-item">Instagram</div>
+          <div class="platform-item">TikTok</div>
+          <div class="platform-item">Twitter/X</div>
+          <div class="platform-item">Reddit</div>
+          <div class="platform-item">LinkedIn</div>
+          <div class="platform-item">Vimeo</div>
+          <div class="platform-item">Dailymotion</div>
+          <div class="platform-item">Twitch</div>
+          <div class="platform-item">Pinterest</div>
+          <div class="platform-item">+1000 more</div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>
+          Built with ❤️ using yt-dlp | Download videos responsibly and respect
+          copyright
+        </p>
+      </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/app.js"></script>
+  </body>
+</html>
